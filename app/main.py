@@ -11,7 +11,18 @@ def index():
 @app.route("/analyze", methods=["POST"])
 def analyze():
     job_description = request.form["job_description"]
+
+    # Validate uploaded data
+    if "resume" not in request.files:
+        return "No resume file uploaded."
+
     resume = request.files["resume"]
+
+    if resume.filename == "":
+        return "No resume file uploaded."
+
+    if not job_description.strip():
+        return "Job description is required."
 
     print("Job description:")
     print(job_description)
