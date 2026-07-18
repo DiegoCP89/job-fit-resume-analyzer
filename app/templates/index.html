@@ -2,11 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Fit Resume Analyzer</title>
   </head>
+
   <body>
-    <h1>Job Fit Resume Analyzer</h1>
-    <p>Upload your resume and compare it with a job description.</p>
-    DIEGO
+    <main>
+      <h1>Job Fit Resume Analyzer</h1>
+
+      <p>Upload your resume and compare it with a job description.</p>
+
+      <form action="/analyze" method="post" enctype="multipart/form-data">
+        <div>
+          <label for="resume">Resume (PDF)</label><br />
+          <input id="resume" type="file" name="resume" accept=".pdf" required />
+        </div>
+
+        <br />
+
+        <div>
+          <label for="job_description">Job Description</label><br />
+          <textarea
+            id="job_description"
+            name="job_description"
+            rows="8"
+            cols="50"
+            placeholder="Paste the job description here..."
+            required
+          ></textarea>
+        </div>
+
+        <br />
+
+        <button type="submit">Analyze Resume</button>
+      </form>
+    </main>
   </body>
 </html>
