@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request
+
 from services.pdf_extractor import extract_text_from_pdf
+from services.text_processor import normalize_text
 
 app = Flask(__name__)
 
+
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() == "pdf"
+
 
 @app.route("/")
 def index():
@@ -12,7 +16,6 @@ def index():
 
 
 @app.route("/analyze", methods=["POST"])
-
 def analyze():
     job_description = request.form["job_description"]
 
@@ -33,19 +36,23 @@ def analyze():
 
     resume_text = extract_text_from_pdf(resume)
 
+    normalized_resume_text = normalize_text(resume_text)
+    normalized_job_description = normalize_text(job_description)
+
     print("Resume filename:")
     print(resume.filename)
 
     print("Resume content type:")
     print(resume.content_type)
 
-    print("Job description:")
+    print("\nOriginal job description:")
     print(job_description)
 
-    print()
+    print("\nNormalized job description:")
+    print(normalized_job_description)
 
-    print("Resume text:")
-    print(resume_text)
+    print("\nNormalized resume text:")
+    print(normalized_resume_text)
 
     return "Form received successfully."
 
