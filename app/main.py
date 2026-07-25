@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 
+from services.analyzer import analyze_resume
 from services.pdf_extractor import extract_text_from_pdf
 from services.text_processor import normalize_text
 
@@ -39,10 +40,24 @@ def analyze():
     normalized_resume_text = normalize_text(resume_text)
     normalized_job_description = normalize_text(job_description)
 
-    print("Resume filename:")
+    matched_words, missing_words, match_score = analyze_resume(
+        normalized_resume_text,
+        normalized_job_description,
+    )
+
+    print("\nMatched words:")
+    print(matched_words)
+
+    print("\nMissing words:")
+    print(missing_words)
+
+    print("\nMatch score:")
+    print(f"{match_score:.2f}%")
+
+    print("\nResume filename:")
     print(resume.filename)
 
-    print("Resume content type:")
+    print("\nResume content type:")
     print(resume.content_type)
 
     print("\nOriginal job description:")
