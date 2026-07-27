@@ -1,3 +1,5 @@
+from services.stop_words import remove_stop_words
+
 def analyze_resume(resume_text, job_description):
     """
     Compare the resume with the job description using keyword matching.
@@ -10,6 +12,9 @@ def analyze_resume(resume_text, job_description):
     """
     resume_words = set(resume_text.split())
     job_words = set(job_description.split())
+
+    resume_words = remove_stop_words(resume_words)
+    job_words = remove_stop_words(job_words)
 
     matched_words = job_words.intersection(resume_words)
     missing_words = job_words.difference(resume_words)
