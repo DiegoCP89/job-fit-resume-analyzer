@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Analysis Result</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
 
   <body>
@@ -12,7 +16,7 @@
 
       <section>
         <h2>Match Score</h2>
-        <p>{{ "%.2f"|format(match_score) }}%</p>
+        <p class="{{ score_class }}">{{ "%.2f"|format(match_score) }}%</p>
       </section>
 
       <section>

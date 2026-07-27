@@ -45,6 +45,13 @@ def analyze():
         normalized_job_description,
     )
 
+    if match_score >= 70:
+        score_class = "high-score"
+    elif match_score >= 40:
+        score_class = "medium-score"
+    else:
+        score_class = "low-score"
+
     print("\nMatched words:")
     print(matched_words)
 
@@ -70,11 +77,12 @@ def analyze():
     print(normalized_resume_text)
 
     return render_template(
-        "result.html",
-        matched_words=sorted(matched_words),
-        missing_words=sorted(missing_words),
-        match_score=match_score,
-    )
+    "result.html",
+    matched_words=sorted(matched_words),
+    missing_words=sorted(missing_words),
+    match_score=match_score,
+    score_class=score_class,
+)
 
 
 if __name__ == "__main__":
