@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Result</title>
+  </head>
+
+  <body>
+    <main>
+      <h1>Resume Analysis Result</h1>
+
+      <section>
+        <h2>Match Score</h2>
+        <p>{{ "%.2f"|format(match_score) }}%</p>
+      </section>
+
+      <section>
+        <h2>Matched Words</h2>
+
+        <ul>
+          {% for word in matched_words %}
+          <li>{{ word }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section>
+        <h2>Missing Words</h2>
+
+        <ul>
+          {% for word in missing_words %}
+          <li>{{ word }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <a href="/">Analyze Another Resume</a>
+    </main>
+  </body>
+</html>

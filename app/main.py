@@ -69,7 +69,12 @@ def analyze():
     print("\nNormalized resume text:")
     print(normalized_resume_text)
 
-    return "Form received successfully."
+    return render_template(
+        "result.html",
+        matched_words=sorted(matched_words),
+        missing_words=sorted(missing_words),
+        match_score=match_score,
+    )
 
 
 if __name__ == "__main__":
