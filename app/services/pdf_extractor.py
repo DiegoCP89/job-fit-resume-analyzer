@@ -1,3 +1,5 @@
+from typing import cast
+
 import pymupdf
 
 
@@ -7,7 +9,7 @@ def extract_text_from_pdf(resume):
     text = ""
 
     for page in document:
-        text += page.get_text()
+        text += cast(str, page.get_text("text"))
 
     document.close()
 
