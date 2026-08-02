@@ -1,8 +1,14 @@
 from flask import Flask, render_template, request
-
 from services.analyzer import analyze_resume
 from services.pdf_extractor import extract_text_from_pdf
 from services.text_processor import normalize_text
+
+from services.feedback import (
+    generate_feedback,
+    get_score_class,
+    generate_recommendations,
+)
+
 
 app = Flask(__name__)
 
@@ -45,12 +51,11 @@ def analyze():
         normalized_job_description,
     )
 
-    if match_score >= 70:
-        score_class = "high-score"
-    elif match_score >= 40:
-        score_class = "medium-score"
-    else:
-        score_class = "low-score"
+    feedback_title, feedback_message = generate_feedback(match_score)
+
+    score_class = get_score_class(match_score)
+
+    recommendations = generate_recommendations(missing_words)
 
     print("\nMatched words:")
     print(matched_words)
@@ -80,8 +85,11 @@ def analyze():
     "result.html",
     matched_words=sorted(matched_words),
     missing_words=sorted(missing_words),
+    recommendations=recommendations,
     match_score=match_score,
     score_class=score_class,
+    feedback_title=feedback_title,
+    feedback_message=feedback_message,
 )
 
 

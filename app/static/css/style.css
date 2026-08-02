@@ -52,3 +52,18 @@ a:hover {
   color: red;
   font-weight: bold;
 }
+
+.feedback {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+}
+
+.feedback h2 {
+  margin-top: 0;
+}
+
+.feedback p {
+  margin-bottom: 0;
+}

@@ -19,6 +19,11 @@
         <p class="{{ score_class }}">{{ "%.2f"|format(match_score) }}%</p>
       </section>
 
+      <section class="feedback">
+        <h2>{{ feedback_title }}</h2>
+        <p>{{ feedback_message }}</p>
+      </section>
+
       <section>
         <h2>Matched Words</h2>
 
@@ -35,6 +40,16 @@
         <ul>
           {% for word in missing_words %}
           <li>{{ word }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section>
+        <h2>Recommended Skills</h2>
+
+        <ul>
+          {% for skill in recommendations %}
+          <li>{{ skill.replace("_", " ").title() }}</li>
           {% endfor %}
         </ul>
       </section>
